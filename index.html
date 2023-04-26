@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@600&family=Josefin+Sans:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <input list="cities" type="search" name="search" id="search" placeholder="Search city" autocomplete="off">
+        <datalist id="cities">
+        </datalist>
+        <article id="current-forecast">
+            <h1 class="city">City Name</h1>
+            <p class="temp">--</p>
+            <p class="description">Type a city name above!</p>
+            <p class="min-max-temp">H Low</p>
+        </article>
+        <article id="hourly-forecast">
+            <h1 class="hourly-forecast-header">Hourly Forecast</h1>
+            <section class="hourly-container">
+                <article>
+                    <h2 class="time">Now</h2>
+                    <img src="" alt="">icon
+                    <p class="hourly-temp">Hello!</p>
+                </article>
+                <article>
+                    <h2>Now</h2>
+                    <img src="" alt="">icon
+                    <p>my</p>
+                </article>
+                <article>
+                    <h2>Now</h2>
+                    <img src="" alt="">icon
+                    <p>friend!</p>
+                </article>
+                <article>
+                    <h2>Now</h2>
+                    <img src="" alt="">icon
+                    <p>temp</p>
+                </article>
+            </section>
+        </article>
+        <article id="fiveday-forecast">
+            <h1>5 Day Forecast</h1>
+            <section class="five-day-forecast-container">
+                <article class="day-wise-forecast">
+                    <h3>Today</h3>
+                    <p class="min-temp">Just</p>
+                    <p class="min-temp">type</p>
+                    <p class="max-temp">something</p>
+                </article>
+            </section>            
+            <!-- There will be forecasts here for multiple days -->
+        </article>
+        <article id="feelslike-forecast">
+            <h1>Feels Like</h1>
+            <p class="feels-like-temp">Something good!</p>
+        </article>
+        <article id="humidity-forecast">
+            <h1>Humidity</h1>
+            <p class="humidity-value">-- %</p>
+        </article>
+    </main>
+    <script src="scripts.js"></script>
+</body>
+</html>
