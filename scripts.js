@@ -24,14 +24,28 @@ const getHourlyForecast = async ({ name: city }) => {
 }
 
 const formatTemp = (temp) => `${temp?.toFixed(1)}°C`;
-const createIconURL = (icon) => `https://openweathermap.org/img/wn/${icon}@2x.png`
+const createIconURL = (icon) => `https://openweathermap.org/img/wn/${icon}@2x.png`;
+function msToTime(unix_timestamp) {
+    // Create a new JavaScript Date object based on the timestamp
+    // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+    var date = new Date(unix_timestamp * 1000);
+    // Hours part from the timestamp
+    var hours = date.getHours();
+    // Minutes part from the timestamp
+    var minutes = "0" + date.getMinutes();
 
-const loadCurrentForecast = ({ name, main: {temp, temp_max, temp_min}, weather: [{description}] }) => {
+    // Will display time in 10:30:23 format
+    var formattedTime = hours + ':' + minutes.slice(-2);
+    return formattedTime;
+  }
+
+
+const loadCurrentForecast = ({ name, main: {temp, temp_max, temp_min}, weather: [{description}], sys: {sunrise, sunset} }) => {
     const currentForecastElement = document.querySelector("#current-forecast");
     currentForecastElement.querySelector(".city").textContent = name;
     currentForecastElement.querySelector(".temp").textContent = formatTemp(temp);
     currentForecastElement.querySelector(".description").textContent = description;
-    currentForecastElement.querySelector(".min-max-temp").textContent = `H: ${formatTemp(temp_max)} L: ${formatTemp(temp_min)}`;
+    currentForecastElement.querySelector(".sun").textContent = `Sunrise: ${msToTime(sunrise)}, Sunset: ${msToTime(sunset)}`;
 }
 
 const loadHourlyForecast = ({main:{temp: tempNow}, weather:[{icon: iconNow}]}, hourlyForecast) => {
@@ -62,7 +76,6 @@ const calculateDayWiseForecast = (hourlyForecast) => {
     for (let forecast of hourlyForecast) {
         const [date] = forecast.dt_txt.split(" ");
         const dayOfTheWeek = DAYS_OF_THE_WEEK[new Date(date).getDay()]
-        console.log(dayOfTheWeek);
         if (dayWiseForecast.has(dayOfTheWeek)) {
             let forecastForTheDay = dayWiseForecast.get(dayOfTheWeek);
             forecastForTheDay.push(forecast);
